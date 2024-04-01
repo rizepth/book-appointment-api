@@ -6,23 +6,26 @@ using System.Text;
 
 namespace BookAppointment.API.Authentication
 {
-    public static class JwtGenerator
+    public class JwtGenerator
     {
-        private const string TokenSecret = "RizkySeptyanAhadQwiikCaseworkTestInMarch";
+        //private const string TokenSecret = "RizkySeptyanAhadQwiikCaseworkTestInMarch";
+        private readonly string _tokenSecret;
+        private readonly string _issuer;
+        private readonly string _audience;
         private static readonly TimeSpan TokenLifeTime = TimeSpan.FromHours(8);
 
-        public static string GenerateToken(User user, string userType)
+        public JwtGenerator(IConfiguration configuration)
+        {
+            _tokenSecret = configuration["JwtSettings:Key"];
+            _issuer = configuration["JwtSettings:Issuer"];
+            _audience = configuration["JwtSettings:Audience"];
+        }
+
+        public string GenerateToken(User user, string userType)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(TokenSecret);
+            var key = Encoding.UTF8.GetBytes(_tokenSecret);
 
-            //var claims = new List<Claim>
-            //{
-            //    new(JwtRegisteredClaimNames.Jti, user.Id.ToString()),
-            //    new(JwtRegisteredClaimNames.Sub, user.UserName),
-            //    new(JwtRegisteredClaimNames.Name, user.FullName),
-            //    new("userType", userType)
-            //};
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
@@ -34,8 +37,8 @@ namespace BookAppointment.API.Authentication
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.Add(TokenLifeTime),
-                Issuer = "localhost",
-                Audience = "localhost",
+                Issuer = _issuer,
+                Audience = _audience,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

@@ -16,11 +16,13 @@ namespace BookAppointment.API.Controllers
         private readonly ICustomerService _customer;
         private readonly IAgencyUserService _agency;
         private readonly IMapper _mapper;
-        public AuthController(ICustomerService customer, IMapper mapper, IAgencyUserService agency)
+        private readonly JwtGenerator _jwtGenerator;
+        public AuthController(ICustomerService customer, IMapper mapper, IAgencyUserService agency, JwtGenerator jwtGenerator)
         {
             _customer=customer;
             _mapper=mapper;
             _agency=agency;
+            _jwtGenerator=jwtGenerator;
         }
 
         [HttpPost("customer/register")]
@@ -50,7 +52,7 @@ namespace BookAppointment.API.Controllers
                 return Unauthorized(new ErrorResponse("Invalid username or password"));
             }
 
-            var token = JwtGenerator.GenerateToken(authUser, UserType.Customer);
+            var token = _jwtGenerator.GenerateToken(authUser, UserType.Customer);
             return Ok(new SuccessResponse<string>(token));
         }
 
@@ -81,7 +83,7 @@ namespace BookAppointment.API.Controllers
                 return Unauthorized(new ErrorResponse("Invalid username or password"));
             }
 
-            var token = JwtGenerator.GenerateToken(authUser, UserType.Agency);
+            var token = _jwtGenerator.GenerateToken(authUser, UserType.Agency);
             return Ok(new SuccessResponse<string>(token));
         }
     }

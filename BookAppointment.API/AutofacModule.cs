@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using BookAppointment.API.Authentication;
 using BookAppointment.Core.Interfaces.Common;
 using BookAppointment.Core.Interfaces.Repository;
 using BookAppointment.Core.Interfaces.Services;
@@ -44,6 +45,7 @@ namespace BookAppointment.API
             builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerLifetimeScope();
             builder.RegisterType<UnitOfWork<DataContext>>().As<IUnitOfWork>().InstancePerLifetimeScope();
 
+            builder.RegisterType<JwtGenerator>().AsSelf().SingleInstance();
         }
     }
 }
