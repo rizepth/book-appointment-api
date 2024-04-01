@@ -398,3 +398,7 @@ FodyWeavers.xsd
 *.sln.iml
 BookAppointment.API/appsettings.json
 BookAppointment.API/appsettings.Development.json
+BookAppointment.API/Properties/ServiceDependencies/
+BookAppointment.API/Properties/serviceDependencies.BookAppointmentAPI20240401041607 - Web Deploy.json
+BookAppointment.API/Properties/serviceDependencies.BookAppointmentAPIv1 - Web Deploy.json
+BookAppointment.API/Properties/serviceDependencies.json
