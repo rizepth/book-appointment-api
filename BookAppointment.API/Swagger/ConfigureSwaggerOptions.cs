@@ -27,7 +27,9 @@ namespace BookAppointment.API.Swagger
                         {
                             Type = ReferenceType.SecurityScheme,
                             Id = "Bearer"
-                        }
+                        },
+                        Name = "Authorization",
+                        In = ParameterLocation.Header
                     },
                     Array.Empty<string>()
                 }

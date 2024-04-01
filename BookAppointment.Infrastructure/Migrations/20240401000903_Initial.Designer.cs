@@ -3,17 +3,17 @@ using System;
 using BookAppointment.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace BookAppointment.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240331135519_initial")]
-    partial class initial
+    [Migration("20240401000903_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,54 +21,54 @@ namespace BookAppointment.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.3")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("BookAppointment.Core.Entities.Agency", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("EmailAddress")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("MaxAppointmentLimit")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
@@ -80,10 +80,13 @@ namespace BookAppointment.Infrastructure.Migrations
                             Id = 1,
                             Address = "Indonesia",
                             CompanyName = "Company ABC",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 4, 1, 7, 9, 2, 925, DateTimeKind.Local).AddTicks(8299),
+                            CreatedBy = "admin",
                             EmailAddress = "company@gmail.com",
                             MaxAppointmentLimit = 10,
-                            PhoneNumber = "02188273723"
+                            PhoneNumber = "02188273723",
+                            UpdatedAt = new DateTime(2024, 4, 1, 7, 9, 2, 925, DateTimeKind.Local).AddTicks(8315),
+                            UpdatedBy = "admin"
                         });
                 });
 
@@ -91,37 +94,37 @@ namespace BookAppointment.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -131,9 +134,12 @@ namespace BookAppointment.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 4, 1, 7, 9, 2, 925, DateTimeKind.Local).AddTicks(8540),
+                            CreatedBy = "admin",
                             FullName = "administrator",
-                            Password = "xxxxx",
+                            Password = "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=",
+                            UpdatedAt = new DateTime(2024, 4, 1, 7, 9, 2, 925, DateTimeKind.Local).AddTicks(8542),
+                            UpdatedBy = "admin",
                             UserName = "admin"
                         });
                 });
@@ -142,37 +148,37 @@ namespace BookAppointment.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("AppoinmentDate")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<DateOnly>("AppointmentDate")
+                        .HasColumnType("date");
 
                     b.Property<TimeSpan>("AppointmentTime")
-                        .HasColumnType("interval");
+                        .HasColumnType("time");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("CustomerId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("Token")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
@@ -185,47 +191,47 @@ namespace BookAppointment.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("EmailAddress")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -236,16 +242,16 @@ namespace BookAppointment.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateOnly>("DayOffDate")
                         .HasColumnType("date");
@@ -253,14 +259,14 @@ namespace BookAppointment.Infrastructure.Migrations
                     b.Property<string>("DayOffNotes")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
