@@ -37,11 +37,9 @@ namespace BookAppointment.API
             builder.Register(c =>
             {
                 var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
-                optionsBuilder.UseNpgsql(_configuration.GetConnectionString("ConnectionApp"));
+                optionsBuilder.UseSqlServer(_configuration.GetConnectionString("ConnectionApp"));
                 return new DataContext(optionsBuilder.Options);
             }).InstancePerLifetimeScope();
-
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerLifetimeScope();
             builder.RegisterType<UnitOfWork<DataContext>>().As<IUnitOfWork>().InstancePerLifetimeScope();
