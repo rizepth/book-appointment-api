@@ -12,6 +12,7 @@ using BookAppointment.API.Common.TypeConverters;
 using Autofac.Extensions.DependencyInjection;
 using Autofac;
 using BookAppointment.API;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -54,6 +55,17 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt =>
 {
+    opt.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Book Appointmetnt API Documentation",
+        Version = "v1",
+        Description = "This API allows customers to book appointments with an agency and provides management functionalities for the agency.",
+        Contact = new OpenApiContact()
+        {
+            Name = "Rizky Septyan Ahad",
+            Email = "rseptyan9@gmail.com",
+        }
+    });
     opt.MapType<DateOnly>(() => new OpenApiSchema
     {
         Type = "string",
@@ -66,19 +78,33 @@ builder.Services.AddSwaggerGen(opt =>
         Format = "time",
         Example = new OpenApiString(DateTime.Today.ToString("hh:mm"))
     });
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    opt.IncludeXmlComments(xmlPath);
 }
 );
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
 var app = builder.Build();
 
-app.UseSwagger();
-app.UseSwaggerUI(
-    c => {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Booking Appointment API V1");
-        c.RoutePrefix = String.Empty;
-    }
-);
+app.UseSwagger(u =>
+{
+    u.RouteTemplate = "swagger/{documentName}/swagger.json";
+});
+
+app.UseSwaggerUI(c =>
+{
+    c.RoutePrefix = "swagger";
+    c.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "Book Appointment API v1");
+});
+
+//unremark code below if deploying to azure
+//app.UseSwaggerUI(
+//    c => {
+//        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Booking Appointment API V1");
+//        c.RoutePrefix = String.Empty;
+//    }
+//);
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

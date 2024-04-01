@@ -19,7 +19,18 @@ namespace BookAppointment.API.Controllers
             _customer=customer;
         }
 
+        /// <summary>
+        /// Get all customers.
+        /// </summary>
+        /// <remarks>
+        /// This endpoint allows the agency to retrieve a list of all registered customers.
+        ///
+        /// The response includes basic information about each customer, such as their name, email, and registration date.
+        /// </remarks>
+        /// <returns>Returns a list of all registered customers.</returns>
         [HttpGet("get-all")]
+        [ProducesResponseType(typeof(SuccessResponse<List<Customer>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetAllCustomer()
         {
             var customers = _customer.GetAll();

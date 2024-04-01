@@ -7,11 +7,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A5429177-BDB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{92B864FC-C114-40A6-A2C7-88829DA626F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookAppointment.API", "BookAppointment.API\BookAppointment.API.csproj", "{2CA5CD48-AA35-408D-B696-D16CF09581B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookAppointment.API", "BookAppointment.API\BookAppointment.API.csproj", "{2CA5CD48-AA35-408D-B696-D16CF09581B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookAppointment.Core", "BookAppointment.Core\BookAppointment.Core.csproj", "{912FA910-23C4-45B3-BD11-945FAB99143C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookAppointment.Core", "BookAppointment.Core\BookAppointment.Core.csproj", "{912FA910-23C4-45B3-BD11-945FAB99143C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookAppointment.Infrastructure", "BookAppointment.Infrastructure\BookAppointment.Infrastructure.csproj", "{9A675A25-B74C-4E31-A00E-55E66FE181DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookAppointment.Infrastructure", "BookAppointment.Infrastructure\BookAppointment.Infrastructure.csproj", "{9A675A25-B74C-4E31-A00E-55E66FE181DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookAppoitment.Tests", "BookAppoitment.Tests\BookAppoitment.Tests.csproj", "{22BDCFE7-B4A1-4956-94DC-8E896AD02805}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{9A675A25-B74C-4E31-A00E-55E66FE181DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A675A25-B74C-4E31-A00E-55E66FE181DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A675A25-B74C-4E31-A00E-55E66FE181DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22BDCFE7-B4A1-4956-94DC-8E896AD02805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22BDCFE7-B4A1-4956-94DC-8E896AD02805}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22BDCFE7-B4A1-4956-94DC-8E896AD02805}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22BDCFE7-B4A1-4956-94DC-8E896AD02805}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 		{2CA5CD48-AA35-408D-B696-D16CF09581B0} = {A5429177-BDB7-4F59-A7F6-2ACF6CC4A123}
 		{912FA910-23C4-45B3-BD11-945FAB99143C} = {A5429177-BDB7-4F59-A7F6-2ACF6CC4A123}
 		{9A675A25-B74C-4E31-A00E-55E66FE181DC} = {A5429177-BDB7-4F59-A7F6-2ACF6CC4A123}
+		{22BDCFE7-B4A1-4956-94DC-8E896AD02805} = {92B864FC-C114-40A6-A2C7-88829DA626F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {18BDC69B-29E5-4575-BF82-EEA033B25D7F}

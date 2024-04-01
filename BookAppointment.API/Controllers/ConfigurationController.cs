@@ -27,8 +27,18 @@ namespace BookAppointment.API.Controllers
             _dayoff=dayoff;
         }
 
-
+        /// <summary>
+        /// Set the maximum number of appointments per day.
+        /// </summary>
+        /// <remarks>
+        /// This endpoint allows the agency to set the maximum number of appointments allowed per day.
+        /// </remarks>
+        /// <param name="request">The request containing the maximum number of appointments per day.</param>
+        /// <returns>Returns a success message upon setting the maximum limit.</returns>
         [HttpPatch("set-max-limit")]
+        [ProducesResponseType(typeof(SuccessResponse<Object>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> SetMaximumLimit(int maximumLimit)
         {
             try
@@ -42,7 +52,18 @@ namespace BookAppointment.API.Controllers
             return Ok(new SuccessResponse<Object>());
         }
 
+        /// <summary>
+        /// Create a new day off.
+        /// </summary>
+        /// <remarks>
+        /// This endpoint allows the agency to create a new day off e.g (public holiday) on which appointments cannot be booked.
+        /// </remarks>
+        /// <param name="request">The request containing the day off details.</param>
+        /// <returns>Returns a success message.</returns>
         [HttpPost("create-dayoff")]
+        [ProducesResponseType(typeof(SuccessResponse<Object>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> CreateDayOff(DayoffRequest req)
         {
             var data = _mapper.Map<DayOff>(req);
@@ -57,7 +78,19 @@ namespace BookAppointment.API.Controllers
             return Ok(new SuccessResponse<object>());
         }
 
+        /// <summary>
+        /// Update an existing day off.
+        /// </summary>
+        /// <remarks>
+        /// This endpoint allows the agency to update the details of an existing day off.
+        /// </remarks>
+        /// <param name="request">The request containing the updated off day details.</param>
+        /// <returns>Returns a success message.</returns>
         [HttpPut("update-dayoff/{id:int}")]
+        [ProducesResponseType(typeof(SuccessResponse<Object>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateDayOff(DayoffRequest req, int id)
         {
             var data = _mapper.Map<DayOff>(req);
@@ -73,7 +106,19 @@ namespace BookAppointment.API.Controllers
             return Ok(new SuccessResponse<object>());
         }
 
+        /// <summary>
+        /// Delete a day off.
+        /// </summary>
+        /// <remarks>
+        /// This endpoint allows the agency to delete an existing day off.
+        /// </remarks>
+        /// <param name="id">The ID of the day off to delete.</param>
+        /// <returns>Returns a success message upon deleting the day off.</returns>
         [HttpDelete("delete-dayoff/{id:int}")]
+        [ProducesResponseType(typeof(SuccessResponse<Object>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteDayOff(int id)
         {
             try
